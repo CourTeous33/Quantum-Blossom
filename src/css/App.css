@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#videoPlayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;  /* This ensures the video stays behind other content */
+}
+
+.content {
+  position: relative;
+  z-index: 1;  /* This ensures content stays above the video */
+  color: white; /* Makes text visible against dark video */
+  text-align: center;
+}
+
+.start-page {
+
+}
+
+#nextButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+#skipButton {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+#muteButton {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+
+#restartButton {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+button {
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  color: white;
+  z-index: 1000;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}

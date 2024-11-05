@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumBlossom</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+
+        #videoPlayer {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        #nextButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        #skipButton {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        #muteButton {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+        }
+
+        #restartButton {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            color: white;
+            z-index: 1000;
+        }
+
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+      <video id="videoPlayer" autoplay playsinline loop>
+          <source src="../statics/videos/bg1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <audio id="audioPlayer">
+          <source src="../statics/audios/0-welcomePageBgm.MP3" type="audio/mpeg">
+          Your browser does not support the audio element.
+      </audio>
+
+      <div id="pageContent"></div>
+
+      <button id="nextButton">Start</button>
+      <button id="skipButton">Skip</button>
+      <button id="muteButton">🔊 Sound On</button>
+      <button id="restartButton">Back to Start</button>
+  </div>
+
+  <script>
+      // Function to update page content
+      function updatePageContent() {
+          pageContent.innerHTML = content[currentIndex].htmlContent;
+      }
+
+      // Function to update button text
+      function updateButtonText() {
+          const nextIndex = (currentIndex + 1) % content.length;
+          nextButton.textContent = content[nextIndex].buttonText;
+      }
+
+      // Function to play next video and audio
+      function playNext() {
+          currentIndex = (currentIndex + 1) % content.length;
+          console.log(currentIndex)
+          isFirstPage = currentIndex == 0
+          
+          // Update video source
+          videoPlayer.src = content[currentIndex].video;
+          videoPlayer.play().catch(function(error) {
+              console.log("Video play failed:", error);
+          });
+
+          // Update and play audio
+          audioPlayer.src = content[currentIndex].audio;
+          audioPlayer.muted = isMuted; // Respect mute state
+          audioPlayer.play().catch(function(error) {
+              console.log("Audio play failed:", error);
+          });
+
+          // Update button text and page content
+          updateButtonText();
+          updatePageContent();
+          updateRestartButtonVisibility();
+
+          switch (currentIndex) {
+            case 0:
+                break;
+            case 1:
+          }
+
+          return currentIndex;
+      }
+
+      // Function to start audio playback
+      function startAudio() {
+          if (isFirstPlay) {
+              videoPlayer.muted = false;
+              audioPlayer.src = content[currentIndex].audio;
+              audioPlayer.muted = isMuted; // Respect mute state
+              audioPlayer.play().catch(function(error) {
+                  console.log("Audio play failed:", error);
+              });
+              isFirstPlay = false;
+          }
+      }
+
+      function toggleMute() {
+          isMuted = !isMuted;
+          audioPlayer.muted = isMuted;
+          muteButton.innerHTML = isMuted ? '🔇 Sound Off' : '🔊 Sound On';
+      }
+
+      function restartFromBeginning() {
+          currentIndex = -1; // Set to -1 because playNext will increment it to 0
+
+          // Update UI and content
+          playNext();
+          
+          // Reset audio to beginning
+          audioPlayer.currentTime = 0;
+          
+          // If you want audio to start automatically on restart
+          audioPlayer.play().catch(function(error) {
+              console.log("Audio restart failed:", error);
+          });
+          
+          // Update button text to show 'Start'
+          nextButton.textContent = content[0].buttonText;
+      }
+
+      // Optional: Hide restart button on first page
+      function updateRestartButtonVisibility() {
+          console.log(isFirstPage)
+          restartButton.style.display = isFirstPage ? 'none' : 'block';
+      }
+
+      const videoPlayer = document.getElementById('videoPlayer');
+      const audioPlayer = document.getElementById('audioPlayer');
+      const nextButton = document.getElementById('nextButton');
+      const skipButton = document.getElementById('skipButton');
+      const muteButton = document.getElementById('muteButton');
+      const pageContent = document.getElementById('pageContent');
+      const restartButton = document.getElementById('restartButton');
+      let isMuted = false;
+
+      
+      // Array of video and audio sources with custom button text
+      const content = [
+          {
+              video: '../statics/videos/bg1.mp4',
+              audio: '../statics/audios/0-welcomePageBgm.MP3',
+              buttonText: 'Start',
+              htmlContent: `
+                    <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center;">
+                        <h1>量子花綻</h1>
+                        <img src="../statics/1-Quantum-Blossom-2024-10-29.png" alt="Logo">
+                        <p>請戴耳機體驗</p>
+                        <p>Click Start to begin</p>
+                    </div>
+                `
+          },
+          {
+              video: '../statics/videos/bg1.mp4',
+              audio: '../statics/audios/1-desktop.MP3',
+              buttonText: 'Start',
+              htmlContent: `
+                    <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center;">
+                        <h1>量子花綻</h1>
+                        <img src="../statics/1-Quantum-Blossom-2024-10-29.png" alt="Logo">
+                        <div style="display: flex; justify-content: center; gap: 20px;">
+                            <button id="nextButton">是</button>
+                            <button id="nextButton">否</button>
+                        </div>
+                    </div>
+                `
+          },
+          {
+              video: '../statics/videos/bg1.mp4',
+              audio: '../statics/audios/2-yes.MP3',
+              buttonText: 'Enter Black Box',
+              htmlContent: `
+                    <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center;">
+                        <h2>「未來，真是個有趣的詞。」</h2>
+                    </div>
+                `
+          },
+          {
+              video: '../statics/videos/bg4.mp4',
+              audio: '../statics/audios/4-Black Box.MP3',
+              buttonText: 'YOU SHALL NOT SEE THIS BUTTON',
+              htmlContent: `
+                    <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center;">
+                        <h2>「宇宙中最純粹的隨機性！」</h2>
+                    </div>
+                `
+          },
+          {
+              video: '../statics/videos/bg4.mp4',
+              audio: '../statics/audios/5-Question.MP3',
+              buttonText: '「是」 >>',
+              htmlContent: `
+                    <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center;">
+                        <h2>「此刻，你想知道什麽？」</h2>
+                    </div>
+                `
+          },
+          {
+              video: '../statics/videos/bg6.mp4',
+              audio: '../statics/audios/6-Number.MP3',
+              buttonText: 'YOU SHALL NOT SEE THIS BUTTON',
+              htmlContent: `
+                  <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center;">
+                  </div>
+              `
+          },
+          {
+              video: '../statics/videos/bg7.mp4',
+              audio: '../statics/audios/7-Number.MP3',
+              buttonText: '已找到我的花朵 >>',
+              htmlContent: `
+                  <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center;">
+                    <h2>1538C928</h2>
+                  </div>
+              `
+          },
+          {
+              video: '../statics/videos/bg7.mp4',
+              audio: '../statics/audios/8-Petel.MP3',
+              buttonText: 'YOU SHALL NOT SEE THIS BUTTON',
+              htmlContent: `
+                  <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white;">
+                      <h2>摘下第一片花瓣，
+                          默念「是」，
+                          摘下第二片，
+                          默念「否」</h2>
+                  </div>
+              `
+          },
+          {
+              video: '../statics/videos/bg9.mp4',
+              audio: '../statics/audios/9-Ending.MP3',
+              buttonText: 'YOU SHALL NOT SEE THIS BUTTON',
+              htmlContent: `
+                  <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white;">
+                      <h2>「注意尚未顯現的潛在路徑！」</h2>
+                  </div>
+              `
+          }
+      ];
+      
+      let currentIndex = 0;
+      let isFirstPlay = true;
+      let isFirstPage = true; 
+
+      // Event listeners
+      nextButton.addEventListener('click', () => {
+          if (isFirstPage) {
+              // Only start audio if it's the first interaction
+              if (isFirstPlay) {
+                  startAudio();
+              }
+              playNext();
+          } else {
+              playNext();
+              startAudio();
+          }
+      });
+
+      skipButton.addEventListener('click', () => {
+          nextIdx = playNext();
+          startAudio();
+          isFirstPage = nextIdx === 0;
+       });
+
+      muteButton.addEventListener('click', toggleMute);
+
+      // Add event listener for audio ending
+      audioPlayer.addEventListener('ended', () => {
+          if (isFirstPage) {
+              // If it's the first page, replay the same audio
+              audioPlayer.currentTime = 0;
+              audioPlayer.play().catch(function(error) {
+                  console.log("Audio replay failed:", error);
+              });
+          } else {
+              // For other pages, proceed to next
+              playNext();
+          }
+      });
+
+      // Add event listener for restart button
+      restartButton.addEventListener('click', restartFromBeginning);
+
+      // Click anywhere to start audio (needed for browser autoplay policies)
+      document.addEventListener('click', startAudio, { once: true });
+
+      // Ensure video plays on load
+      videoPlayer.play().catch(function(error) {
+          console.log("Initial video play failed:", error);
+      });
+
+      // Set initial button text
+      updateButtonText();
+      // Initialize restart button visibility
+      updateRestartButtonVisibility();
+      // Initialize first page content
+      updatePageContent();
+  </script>
+</body>
+</html>
