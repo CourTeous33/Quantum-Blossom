@@ -9,6 +9,7 @@ import NumberPage from './components/NumberPage';
 import ResultPage from './components/ResultPage';
 import PetalPage from './components/PetalPage';
 import EndingPage from './components/EndingPage';
+import NoStockPage from './components/NoStockPage';
 import Layout from './components/Layout';
 import './css/App.css';
 
@@ -27,8 +28,8 @@ const App = () => {
           <Route path="/result" element={<ResultPage />} />  
           <Route path="/petal" element={<PetalPage />} />  
           <Route path="/ending" element={<EndingPage />} />  
+          <Route path="/no-stock" element={<NoStockPage />} />  
         </Route>
-        
       </Routes>
     </Router>
   );

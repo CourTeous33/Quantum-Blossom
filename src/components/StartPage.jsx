@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AudioContext from '../contexts/AudioContext';
 import bg1 from '../statics/videos/bg1.mp4';
@@ -8,6 +8,7 @@ import bgAudio from '../statics/audios/1-desktop.mp3';
 const StartPage = () => {
   const { audioRef, videoRef, isMuted } = useContext(AudioContext);
   const navigate = useNavigate();
+  const [isAudioFinished, setIsAudioFinished] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -42,6 +43,7 @@ const StartPage = () => {
       <audio
         ref={audioRef}
         id="audioPlayer"
+        onEnded={() => setIsAudioFinished(true)}
       >
         <source src={ bgAudio } type="audio/mpeg" />
       </audio>
@@ -49,10 +51,12 @@ const StartPage = () => {
       <div className='welcome-page start-page content'>
         <h1>量子花綻</h1>
         <img src={ logo } alt="Logo" />
-        <div className='start-page-buttons'>
-            <button>是</button>
-            <button>否</button>
-        </div>
+        {isAudioFinished && 
+          <div className='start-page-buttons'>
+            <button onClick={() => navigate('/yes')}>是</button>
+            <button onClick={() => navigate('/no')}>否</button>
+          </div>
+        }
       </div>  
     </>
   );

@@ -2,8 +2,7 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AudioContext from '../contexts/AudioContext';
 import bg1 from '../statics/videos/bg1.mp4';
-import logo from '../statics/1-Quantum-Blossom-2024-10-29.png';
-import bgAudio from '../statics/audios/1-desktop.mp3';
+import bgAudio from '../statics/audios/2-yes.mp3';
 
 const YesPage = () => {
   const { audioRef, videoRef, isMuted } = useContext(AudioContext);
@@ -43,7 +42,7 @@ const YesPage = () => {
         ref={audioRef}
         id="audioPlayer"
         onEnded={() => {
-            navigate('/next'); // Assuming you want to navigate to next page when audio ends
+            navigate('/black-box'); // Assuming you want to navigate to next page when audio ends
         }}
       >
         <source src={ bgAudio } type="audio/mpeg" />
