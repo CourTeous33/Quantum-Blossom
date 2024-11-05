@@ -41,6 +41,7 @@ const ResultPage = () => {
       <audio
         ref={audioRef}
         id="audioPlayer"
+        onEnded={() => navigate('/')}
       >
         <source src={ bgAudio } type="audio/mpeg" />
       </audio>
