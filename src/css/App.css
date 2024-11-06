@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: black;
 }
 
 .container {
@@ -34,15 +35,11 @@ body {
   font-family: monospace;
 }
 
-
-.start-page {
-
-}
-
 #nextButton {
   position: fixed;
-  bottom: 25%;
-  right: 25%;
+  bottom: 23%;
+  left: 70%;
+  font-size: 24px;
 }
 
 #skipButton {
@@ -69,6 +66,13 @@ body {
   right: 20px;
 }
 
+.start-page-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 160px;
+  font-size: 36px;
+}
+
 button {
   padding: 10px 20px;
   background-color: rgba(255, 255, 255, 0.3);
@@ -81,6 +85,21 @@ button {
   z-index: 1000;
 }
 
+h1 {
+  font-size: 60px;
+}
+
 button:hover {
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+.petal-page {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.petal-page p {
+  font-size: 36px;
+  text-align: left;
 }
