@@ -27,38 +27,38 @@ const ResultPage = () => {
   }, []);
 
   useEffect(() => {
-    getTag();
-  }, []);
+    const getTag = async () => {
+      const randomNumber = Math.floor(Math.random() * 100);
+      const oddTags = JSON.parse(sessionStorage.getItem('oddTags'));
+      const evenTags = JSON.parse(sessionStorage.getItem('evenTags'));
+      console.log(oddTags);
+      console.log(evenTags);
+  
+      let tag = "123123123";
+      if (randomNumber % 2 === 0 && evenTags.length > 0) {
+        const tagIdx = Math.floor(randomNumber / 2) % evenTags.length;
+        tag = evenTags[tagIdx];
+        evenTags.splice(tagIdx, 1);
+        sessionStorage.setItem('evenTags', JSON.stringify(evenTags));
+      } else if (oddTags.length > 0) {
+        const tagIdx = Math.floor(randomNumber / 2) % oddTags.length;
+        tag = oddTags[tagIdx];
+        oddTags.splice(tagIdx, 1);
+        sessionStorage.setItem('oddTags', JSON.stringify(oddTags));
+      } else {
+        const tagIdx = Math.floor(randomNumber / 2) % evenTags.length;
+        tag = evenTags[tagIdx];
+        evenTags.splice(tagIdx, 1);
+        sessionStorage.setItem('evenTags', JSON.stringify(evenTags));
+      }
 
-  const getTag = () => {
-    const randomNumber = Math.floor(Math.random() * 100);
-    const oddTags = JSON.parse(sessionStorage.getItem('oddTags'));
-    const evenTags = JSON.parse(sessionStorage.getItem('evenTags'));
-    console.log(oddTags);
-    console.log(evenTags);
-
-    if (randomNumber % 2 === 0 && evenTags.length > 0) {
-      const tagIdx = (randomNumber / 2) % evenTags.length;
-      setTag(evenTags[tagIdx]);
-      console.log(evenTags[tagIdx]);
-      evenTags.splice(tagIdx, 1);
-      sessionStorage.setItem('evenTags', JSON.stringify(evenTags));
-    } else if (oddTags.length > 0) {
-      const tagIdx = (randomNumber / 2) % oddTags.length;
-      setTag(oddTags[tagIdx]);
-      console.log(oddTags[tagIdx]);
-      oddTags.splice(tagIdx, 1);
-      sessionStorage.setItem('oddTags', JSON.stringify(oddTags));
-    } else {
-      const tagIdx = (randomNumber / 2) % evenTags.length;
-      setTag(evenTags[tagIdx]);
-      console.log(evenTags[tagIdx]);
-      evenTags.splice(tagIdx, 1);
-      sessionStorage.setItem('evenTags', JSON.stringify(evenTags));
+      setTag(tag);
     }
 
-  }
-
+    getTag();
+  }, [setTag]);
+  
+  console.log(tag);
   return (
     <>
       <video
@@ -80,9 +80,11 @@ const ResultPage = () => {
       </audio>
 
       <div className='result-page content'>
-        <h1>
+        {tag ? <h1>
             {tag}
-        </h1>
+        </h1> : <p>
+            {"正在尋找你的花朵..."}
+        </p>}
       </div>  
       
       <div className='result-page-button'>

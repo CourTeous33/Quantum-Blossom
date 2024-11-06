@@ -56,7 +56,7 @@ const NumberPage = () => {
         <source src={ bgAudio } type="audio/mpeg" />
       </audio>
       
-      <button id="nextButton" onClick={() => navigate('/result')}>{"skip >>"}</button>
+      <button id="nextButton" onClick={handleAudioEnd}>{"skip >>"}</button>
     </>
   );
 };
