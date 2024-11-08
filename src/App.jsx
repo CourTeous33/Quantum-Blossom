@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 import WelcomePage from './components/WelcomePage';
 import StartPage from './components/StartPage';
 import YesPage from './components/YesPage';
@@ -14,6 +15,33 @@ import Layout from './components/Layout';
 import './css/App.css';
 
 const App = () => {
+  useEffect(() => {
+    let inactivityTimer;
+    const resetTimer = () => {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        window.location.href = '/';
+      }, 10 * 60 * 1000); // 10 minutes in milliseconds
+    };
+
+    // Reset timer on user activity
+    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+    events.forEach(event => {
+      document.addEventListener(event, resetTimer);
+    });
+
+    // Initial timer setup
+    resetTimer();
+
+    // Cleanup
+    return () => {
+      clearTimeout(inactivityTimer);
+      events.forEach(event => {
+        document.removeEventListener(event, resetTimer);
+      });
+    };
+  }, []);
+
   return (
     <Router>
       <Routes>
