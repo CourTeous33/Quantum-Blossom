@@ -36,7 +36,7 @@ function Layout() {
         navigate('/black-box');
         break;
       case '/no':
-        navigate('/black-box');
+        navigate('/');
         break;
       case '/black-box':
         navigate('/question');
