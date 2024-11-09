@@ -47,12 +47,10 @@ const ResultPage = () => {
       </audio>
 
       <div className='ending-page content'>
-        <h1>
+        <h2>
         「注意尚未顯現的潛在路徑！」
-        </h1>
+        </h2>
       </div>
-
-      <button id="nextButton" onClick={() => navigate('/')}>{"返回首頁"}</button>
     </>
   );
 };

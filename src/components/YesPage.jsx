@@ -48,8 +48,8 @@ const YesPage = () => {
         <source src={ bgAudio } type="audio/mpeg" />
       </audio>
 
-      <div className='welcome-page start-page content'>
-        <h1>「未來，真是個有趣的詞。」</h1>
+      <div className='content'>
+        <h2>「未來，真是個有趣的詞。」</h2>
       </div>  
     </>
   );

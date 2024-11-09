@@ -8,7 +8,7 @@ import bgAudio from '../statics/audios/1-desktop.mp3';
 const StartPage = () => {
   const { audioRef, videoRef, isMuted } = useContext(AudioContext);
   const navigate = useNavigate();
-  const [isAudioFinished, setIsAudioFinished] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -24,6 +24,23 @@ const StartPage = () => {
       audioRef.current.play().catch((error) => 
         console.log("Audio play failed:", error)
       );
+
+      // Add timeupdate event listener
+      const handleTimeUpdate = () => {
+        if (audioRef.current.currentTime >= 10) {  // 10 seconds
+          setShowButtons(true);
+          audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+        }
+      };
+
+      audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
+
+      // Cleanup
+      return () => {
+        if (audioRef.current) {
+          audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+        }
+      };
     }
   }, []);
 
@@ -43,18 +60,17 @@ const StartPage = () => {
       <audio
         ref={audioRef}
         id="audioPlayer"
-        onEnded={() => setIsAudioFinished(true)}
       >
         <source src={ bgAudio } type="audio/mpeg" />
       </audio>
 
       <div className='start-page welcome-page content'>
-        <div className='start-page-text'>
-
-        </div>
-        <h1>量子花綻</h1>
-        <img src={ logo } alt="Logo" />
-        {isAudioFinished && 
+        <div className='welcome-page-title'>
+          
+          <h1>量子花綻</h1>
+          <img src={ logo } alt="Logo" />
+        </div> 
+        {showButtons && 
           <div className='start-page-buttons'>
             <button onClick={() => navigate('/no')}>否</button>
             <button onClick={() => navigate('/yes')}>是</button>

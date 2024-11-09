@@ -50,19 +50,19 @@ const WelcomePage = () => {
   const restock = () => {
     sessionStorage.clear();
     const oddTags = [
-      "146fc9a",
-      "2b21420f",
-      "3fe26160",
-      "476996be",
-      "afe01fd"
+      "146FC9A",
+      "2B21420F",
+      "3FE26160",
+      "476996BE",
+      "AFE01FD"
     ];
     sessionStorage.setItem('oddTags', JSON.stringify(oddTags));
     const evenTags = [
-      "65a65473",
-      "7fbc7bfb",
-      "8561ed5d",
-      "9a60e3b3",
-      "b5aebc13"
+      "65A65473",
+      "7FBC7BF",
+      "8561ED5D",
+      "9A60E3B3",
+      "B5AEBC13"
     ]
     sessionStorage.setItem('evenTags', JSON.stringify(evenTags));
     
@@ -92,16 +92,18 @@ const WelcomePage = () => {
       </audio>
 
       <div className="welcome-page content">
-        <h1>量子花綻</h1>
-        <img src={ logo } alt="Logo" onClick={() => {
-            if (!window.clickCount) window.clickCount = 0;
-            window.clickCount++;
-            if (window.clickCount === 5) {
-              window.clickCount = 0;
-              restock()
-            }
-          }}
-        />
+        <div className='welcome-page-title'>
+          <h1>量子花綻</h1>
+          <img src={ logo } alt="Logo" onClick={() => {
+              if (!window.clickCount) window.clickCount = 0;
+              window.clickCount++;
+              if (window.clickCount === 5) {
+                window.clickCount = 0;
+                restock()
+              }
+            }}
+          />
+        </div>
         <div className='welcome-page-text'>
           {isStock ? <p>請戴耳機體驗</p> : <p>請聯繫工作人員補充花朵</p>}
           <p>Click Start to Begin</p>

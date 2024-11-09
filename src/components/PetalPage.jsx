@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AudioContext from '../contexts/AudioContext';
 import bg1 from '../statics/videos/bg7.mp4';
@@ -7,6 +7,8 @@ import bgAudio from '../statics/audios/8-petal.mp3';
 const ResultPage = () => {
   const { audioRef, videoRef, isMuted } = useContext(AudioContext);
   const navigate = useNavigate();
+  const [showButtons, setShowButtons] = useState(false);
+
 
   useEffect(() => {
     if (videoRef.current) {
@@ -22,6 +24,23 @@ const ResultPage = () => {
       audioRef.current.play().catch((error) => 
         console.log("Audio play failed:", error)
       );
+
+      // Add timeupdate event listener
+      const handleTimeUpdate = () => {
+        if (audioRef.current.currentTime >= 17) {  // 17 seconds
+          setShowButtons(true);
+          audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+        }
+      };
+
+      audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
+
+      // Cleanup
+      return () => {
+        if (audioRef.current) {
+          audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+        }
+      };
     }
   }, []);
 
@@ -54,8 +73,9 @@ const ResultPage = () => {
             默念「否」
         </p>
       </div>
-
-      <button id="nextButton" onClick={() => navigate('/ending')}>{"聆聽啟示"}</button>
+      {showButtons && (
+        <button id="nextButton" onClick={() => navigate('/ending')}>{"聆聽啟示"}</button>
+      )}
     </>
   );
 };

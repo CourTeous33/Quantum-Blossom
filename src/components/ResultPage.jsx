@@ -80,15 +80,13 @@ const ResultPage = () => {
       </audio>
 
       <div className='result-page content'>
-        {tag ? <h1>
-            {tag}
-        </h1> : <p>
-            {"正在尋找你的花朵..."}
-        </p>}
+        <div className="result-text">
+          {tag ? <h1>{tag}</h1> : <p>{"正在尋找你的花朵..."}</p>}
+        </div>
       </div>  
       
-      <div className='result-page-button'>
-        <button id="nextButton" onClick={() => navigate('/petal')}>{"已找到我的花朵 >>"}</button>
+      <div className='result-page-buttons'>
+        <button id="nextButton" onClick={() => navigate('/petal')}>{"已找到花朵 >>"}</button>
         <button id="backButton" onClick={() => navigate('/number')}>{"無法找到花朵"}</button>
       </div>
     </>

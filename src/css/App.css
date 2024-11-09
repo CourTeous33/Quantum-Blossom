@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap');
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -30,16 +41,39 @@ body {
   text-align: center;
 }
 
-.welcome-page {
-  margin-top: 100px;
-}
-
-.welcome-page {
-  margin-top: 100px;
+.welcome-page-title {
+  position: fixed;
+  top: 27%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 }
 
 .welcome-page-text {
-  margin-top: 150px;
+  position: fixed;
+  top: 75%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.start-page-buttons {
+  position: fixed;
+  bottom: 25%;  /* Adjust this value as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 160px;
+}
+
+.start-page-buttons button {
+  font-size: 24px;
+  padding: 15px 30px;
+}
+
+.result-page-buttons button {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .start-page {
@@ -57,6 +91,8 @@ body {
   left: 70%;
   font-size: 24px;
   padding: 15px 30px;
+  opacity: 0;  /* Start fully transparent */
+  animation: fadeIn 1s ease-in forwards; 
 }
 
 #nextButton {
@@ -65,12 +101,8 @@ body {
   left: 70%;
   font-size: 24px;
   padding: 15px 30px;
-}
-
-#skipButton {
-  position: fixed;
-  top: 20px;
-  right: 20px;
+  opacity: 0;  /* Start fully transparent */
+  animation: fadeIn 1s ease-in forwards; 
 }
 
 #muteButton {
@@ -83,18 +115,33 @@ body {
 
 #backButton {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 13%;
+  left: 70%;
+  font-size: 24px;
+  padding: 15px 30px;
+  width: 238px;
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards; 
 }
 
 #restartButton {
-  height: 40px;
-  padding: 8px 10px;
-  margin-right: 10px;
+  margin-right: 0;  /* Remove margin since we're using gap */
 }
 
-#replayButton {
+#skipButton svg {
+  width: 36px;  /* Increase from default size */
+  height: 36px; /* Increase from default size */
+}
+
+#skipButton {
   height: 40px;
+  width: 46px;
+  padding: 2px 6px;
+}
+
+#restartButton, #replayButton {
+  height: 40px;
+  width: 46px;
   padding: 8px 10px;
 }
 
@@ -102,6 +149,9 @@ body {
   position: fixed;
   top: 20px;
   left: 20px;
+  display: flex;
+  gap: 10px;  
+  opacity: 1;
 }
 
 .start-page-buttons {
@@ -128,17 +178,54 @@ h1 {
   margin: 0;
 }
 
+h2 {
+  font-size: 44px;
+  margin: 0;
+}
+
 button:hover {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
 .petal-page {
+  font-size: 48px;
+  width: 100%;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .petal-page p {
-  font-size: 36px;
+  font-size: 40px;
+  font-family: 'Quantico', sans-serif;
   text-align: left;
+  margin-left: 160px;  /* Same margin as result-text */
+  line-height: 1.7;    /* Adds some spacing between lines */
+}
+
+.result-page {
+  font-size: 48px;
+  font-family: monospace;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.result-page-buttons button {
+  width: 238px;
+}
+
+.result-text {
+  margin-left: 160px;  /* Adjust this value to control how far from the left edge */
+  text-align: left;
+  opacity: 0;  /* Start fully transparent */
+  animation: fadeIn 1s ease-in forwards; 
+}
+
+.result-page h1 {
+  font-size: 80px;
+  font-family: 'Quantico', sans-serif;
+  text-align: left;
+  margin: 0;
 }

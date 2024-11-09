@@ -19,19 +19,19 @@ const WelcomePage = () => {
   const restock = () => {
     sessionStorage.clear();
     const oddTags = [
-      "146fc9a",
-      "2b21420f",
-      "3fe26160",
-      "476996be",
-      "afe01fd"
+      "146FC9A",
+      "2B21420F",
+      "3FE26160",
+      "476996BE",
+      "AFE01FD"
     ];
     sessionStorage.setItem('oddTags', JSON.stringify(oddTags));
     const evenTags = [
-      "65a65473",
-      "7fbc7bfb",
-      "8561ed5d",
-      "9a60e3b3",
-      "b5aebc13"
+      "65A65473",
+      "7FBC7BF",
+      "8561ED5D",
+      "9A60E3B3",
+      "B5AEBC13"
     ]
     sessionStorage.setItem('evenTags', JSON.stringify(evenTags));
   }

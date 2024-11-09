@@ -49,7 +49,7 @@ const YesPage = () => {
       </audio>
 
       <div className='content'>
-        <h1>「宇宙中最純粹的隨機性！」</h1>
+        <h2>「宇宙中最純粹的隨機性！」</h2>
       </div>  
     </>
   );

@@ -48,11 +48,9 @@ const YesPage = () => {
         <source src={ bgAudio } type="audio/mpeg" />
       </audio>
 
-      <div className='welcome-page start-page content'>
-        <h1>「選擇不作選擇，本身也是一種智慧。」</h1>
+      <div className='content'>
+        <h2>「選擇不作選擇，本身也是一種智慧。」</h2>
       </div>  
-
-      <button id="nextButton" onClick={() => navigate('/')}>回到開始</button>
     </>
   );
 };
