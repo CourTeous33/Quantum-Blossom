@@ -30,9 +30,33 @@ body {
   text-align: center;
 }
 
+.welcome-page {
+  margin-top: 100px;
+}
+
+.welcome-page {
+  margin-top: 100px;
+}
+
+.welcome-page-text {
+  margin-top: 150px;
+}
+
+.start-page {
+  margin-top: 0px;
+}
+
 .result-page {
   font-size: 48px;
   font-family: monospace;
+}
+
+#startButton {
+  position: fixed;
+  bottom: 35%;
+  left: 70%;
+  font-size: 24px;
+  padding: 15px 30px;
 }
 
 #nextButton {
@@ -40,6 +64,7 @@ body {
   bottom: 23%;
   left: 70%;
   font-size: 24px;
+  padding: 15px 30px;
 }
 
 #skipButton {
@@ -51,19 +76,32 @@ body {
 #muteButton {
   position: fixed;
   top: 20px;
-  left: 20px;
+  right: 20px;
+  height: 40px;
+  padding: 8px 10px;
 }
 
-#restartButton {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-}
 #backButton {
   position: fixed;
   bottom: 20px;
   right: 20px;
+}
+
+#restartButton {
+  height: 40px;
+  padding: 8px 10px;
+  margin-right: 10px;
+}
+
+#replayButton {
+  height: 40px;
+  padding: 8px 10px;
+}
+
+.layout-buttons {
+  position: fixed;
+  top: 20px;
+  left: 20px;
 }
 
 .start-page-buttons {
@@ -87,6 +125,7 @@ button {
 
 h1 {
   font-size: 60px;
+  margin: 0;
 }
 
 button:hover {

@@ -86,6 +86,7 @@ const WelcomePage = () => {
       <audio
         ref={audioRef}
         id="audioPlayer"
+        loop
       >
         <source src={ bgAudio } type="audio/mpeg" />
       </audio>
@@ -101,16 +102,18 @@ const WelcomePage = () => {
             }
           }}
         />
-        {isStock ? <p>請戴耳機體驗</p> : <p>請聯繫工作人員補充花朵</p>}
-        <p>Click Start to begin</p>
+        <div className='welcome-page-text'>
+          {isStock ? <p>請戴耳機體驗</p> : <p>請聯繫工作人員補充花朵</p>}
+          <p>Click Start to Begin</p>
+        </div>
       </div>
 
       {isStock && (
         <button 
-          id="nextButton"
+          id="startButton"
         onClick={() => navigate('/start')}
         >
-          Start
+          開&nbsp;&nbsp;始
         </button>
       )}
       <ToastContainer />

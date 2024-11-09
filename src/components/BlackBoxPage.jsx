@@ -48,7 +48,7 @@ const YesPage = () => {
         <source src={ bgAudio } type="audio/mpeg" />
       </audio>
 
-      <div className='welcome-page start-page content'>
+      <div className='content'>
         <h1>「宇宙中最純粹的隨機性！」</h1>
       </div>  
     </>

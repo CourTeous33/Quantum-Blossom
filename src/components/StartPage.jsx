@@ -48,13 +48,16 @@ const StartPage = () => {
         <source src={ bgAudio } type="audio/mpeg" />
       </audio>
 
-      <div className='welcome-page start-page content'>
+      <div className='start-page welcome-page content'>
+        <div className='start-page-text'>
+
+        </div>
         <h1>量子花綻</h1>
         <img src={ logo } alt="Logo" />
         {isAudioFinished && 
           <div className='start-page-buttons'>
-            <button onClick={() => navigate('/yes')}>是</button>
             <button onClick={() => navigate('/no')}>否</button>
+            <button onClick={() => navigate('/yes')}>是</button>
           </div>
         }
       </div>  
