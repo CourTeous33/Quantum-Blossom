@@ -4,7 +4,7 @@ import AudioContext from '../contexts/AudioContext';
 import bg1 from '../statics/videos/bg7.mp4';
 import bgAudio from '../statics/audios/8-petal.mp3';
 
-const ResultPage = () => {
+const PetalPage = () => {
   const { audioRef, videoRef, isMuted } = useContext(AudioContext);
   const navigate = useNavigate();
   const [showButtons, setShowButtons] = useState(false);
@@ -80,4 +80,4 @@ const ResultPage = () => {
   );
 };
 
-export default ResultPage;
+export default PetalPage;
