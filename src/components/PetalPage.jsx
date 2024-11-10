@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AudioContext from '../contexts/AudioContext';
-import bg1 from '../statics/videos/bg7.mp4';
+import bg1 from '../statics/videos/bg8-11.11.mp4';
 import bgAudio from '../statics/audios/8-petal.mp3';
 
 const PetalPage = () => {

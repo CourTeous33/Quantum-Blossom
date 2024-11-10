@@ -217,14 +217,14 @@ button:hover {
 }
 
 .result-text {
-  margin-left: 160px;  /* Adjust this value to control how far from the left edge */
+  margin-left: 80px;  /* Adjust this value to control how far from the left edge */
   text-align: left;
   opacity: 0;  /* Start fully transparent */
   animation: fadeIn 1s ease-in forwards; 
 }
 
 .result-page h1 {
-  font-size: 80px;
+  font-size: 68px;
   font-family: 'Quantico', sans-serif;
   text-align: left;
   margin: 0;
